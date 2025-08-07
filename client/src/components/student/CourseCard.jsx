@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
 
-const CourseCard = () => {
+const CourseCard = ({ course }) => {
   return (
-    <div>CourseCard</div>
-  )
-}
+    <div>
+      <img src={course.courseThumbnail} alt="thumbnai" />
+      <div>
+        <h3>{course.courseTitle}</h3>
+        <p>{course.educator.name}</p>
+        <div>
+          <p>4.5</p>
+          
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default CourseCard
+export default CourseCard;

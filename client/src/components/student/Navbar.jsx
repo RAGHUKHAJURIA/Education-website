@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
-  const isCourseListPage = location.pathname.includes("/Course-list");
+  const isCourseListPage = location.pathname.includes("/course-list");
 
   const { openSignIn } = useClerk();
   const { user } = useUser();
@@ -50,12 +50,13 @@ const Navbar = () => {
             </>
           )}
         </div>
-        {
-          user ? <UserButton/> :  <button>
-          <img src={assets.user_icon} alt="" />
-        </button>
-        }
-       
+        {user ? (
+          <UserButton />
+        ) : (
+          <button>
+            <img src={assets.user_icon} alt="" />
+          </button>
+        )}
       </div>
     </div>
   );
