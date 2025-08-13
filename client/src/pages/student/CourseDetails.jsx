@@ -38,10 +38,10 @@ const CourseDetails = () => {
 
   return courseData ? (
     <>
-      <div className='relative min-h-screen flex md:flex-row flex-col-reverse gap-10 items-start justify-between md:px-36 px-8 md:pt-30 pt-20 text-left'>
+      <div className='relative min-h-screen flex md:flex-row flex-col-reverse gap-10 items-start justify-between md:px-36 px-8 md:pt-30 pt-20 text-left bg-transparent'>
 
         {/* Full-page gradient background */}
-        <div className='absolute inset-0 -z-10 bg-gradient-to-b from-cyan-100 via-white to-gray-200'></div>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c8f1ff] to-[#d9d9d9]"></div>
 
         {/* left column */}
         <div className='max-w-x- z-10 text-gray-500'>
@@ -114,24 +114,24 @@ const CourseDetails = () => {
         </div>
 
         {/* right column */}
-        <div className='max-w-[420px] z-10 shadow-2xl rounded-t md:rounded-none overflow-hidden bg-white min-w-[300px] sm:min-w-[420px]'>
+        <div className='max-w-[420px] z-10 shadow-2xl rounded-t md:rounded-none overflow-hidden  min-w-[300px] sm:min-w-[420px]'>
 
-            {
-                playerData ?
-                  <Youtube videoId={playerData.videoId} opts={{
-                    playerVars: {
-                      autoplay: 1
-                    }
-                  }} iframeClassName='w-full aspect-video' />
-                  : <img src={courseData.courseThumbnail} alt="" />
-              }
+          {
+            playerData ?
+              <Youtube videoId={playerData.videoId} opts={{
+                playerVars: {
+                  autoplay: 1
+                }
+              }} iframeClassName='w-full aspect-video' />
+              : <img src={courseData.courseThumbnail} alt="" />
+          }
 
 
-          
+
           <div className='p-5'>
             <div className='flex items-center gap-2'>
 
-               <img className='w-3.5' src={assets.time_left_clock_icon} alt="" />
+              <img className='w-3.5' src={assets.time_left_clock_icon} alt="" />
 
 
               <p className='text-red-500'> <span className='font-medium'>5 days </span> left at this price</p>
