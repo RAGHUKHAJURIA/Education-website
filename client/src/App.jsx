@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/loading/:path" element={<Loading />} />
         // educator routes
         <Route path="/educator" element={<Educator />}>
-          <Route path="educator" element={<DashBoard />} />
+          <Route path="/educator" element={<DashBoard />} />
           <Route path="add-course" element={<AddCourse />} />
           <Route path="my-courses" element={<MyCourses />} />
           <Route path="student-enrolled" element={<StudentsEnrolled />} />
