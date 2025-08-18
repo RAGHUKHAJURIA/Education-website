@@ -125,91 +125,211 @@ export const dummyTestimonial = [
     },
 ];
 
+// export const dummyDashboardData = {
+//     "totalEarnings": 707.38,
+//     "enrolledStudentsData": [
+//         {
+//             "courseTitle": "Introduction to JavaScript",
+//             "student": {
+//                 "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//                 "name": "Great Stack",
+//                 "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//             }
+//         },
+//         {
+//             "courseTitle": "Advanced Python Programming",
+//             "student": {
+//                 "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//                 "name": "Great Stack",
+//                 "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//             }
+//         },
+//         {
+//             "courseTitle": "Web Development Bootcamp",
+//             "student": {
+//                 "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//                 "name": "Great Stack",
+//                 "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//             }
+//         },
+//         {
+//             "courseTitle": "Data Science with Python",
+//             "student": {
+//                 "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//                 "name": "Great Stack",
+//                 "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//             }
+//         },
+//         {
+//             "courseTitle": "Cybersecurity Basics",
+//             "student": {
+//                 "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//                 "name": "Great Stack",
+//                 "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//             }
+//         }
+//     ],
+//     "totalCourses": 8
+// }
+
 export const dummyDashboardData = {
-    "totalEarnings": 707.38,
-    "enrolledStudentsData": [
+    totalEarnings: 707.38,
+    totalCourses: 8,
+    enrolledStudentsData: [
         {
-            "courseTitle": "Introduction to JavaScript",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
+            courseTitle: "Introduction to JavaScript",
+            student: {
+                _id: "user_1",
+                name: "Richard Sanford",
+                imageUrl: "https://i.pravatar.cc/150?img=1"
+            },
+            date: "22 Aug, 2024"
         },
         {
-            "courseTitle": "Advanced Python Programming",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
+            courseTitle: "Advanced Python Programming",
+            student: {
+                _id: "user_2",
+                name: "Enrique Murphy",
+                imageUrl: "https://i.pravatar.cc/150?img=2"
+            },
+            date: "23 Aug, 2024"
         },
         {
-            "courseTitle": "Web Development Bootcamp",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
+            courseTitle: "Web Development Bootcamp",
+            student: {
+                _id: "user_3",
+                name: "Alison Powell",
+                imageUrl: "https://i.pravatar.cc/150?img=3"
+            },
+            date: "24 Aug, 2024"
         },
         {
-            "courseTitle": "Data Science with Python",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
+            courseTitle: "Data Science with Python",
+            student: {
+                _id: "user_4",
+                name: "Mark Davidson",
+                imageUrl: "https://i.pravatar.cc/150?img=4"
+            },
+            date: "25 Aug, 2024"
         },
         {
-            "courseTitle": "Cybersecurity Basics",
-            "student": {
-                "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-                "name": "Great Stack",
-                "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-            }
+            courseTitle: "Cybersecurity Basics",
+            student: {
+                _id: "user_5",
+                name: "Sophie Turner",
+                imageUrl: "https://i.pravatar.cc/150?img=5"
+            },
+            date: "26 Aug, 2024"
+        },
+        {
+            courseTitle: "React Router Complete Course",
+            student: {
+                _id: "user_6",
+                name: "Jason Miller",
+                imageUrl: "https://i.pravatar.cc/150?img=6"
+            },
+            date: "27 Aug, 2024"
+        },
+        {
+            courseTitle: "AI & Machine Learning Essentials",
+            student: {
+                _id: "user_7",
+                name: "Emily Clark",
+                imageUrl: "https://i.pravatar.cc/150?img=7"
+            },
+            date: "28 Aug, 2024"
         }
-    ],
-    "totalCourses": 8
-}
+    ]
+};
+
+
+// export const dummyStudentEnrolled = [
+//     {
+//         "student": {
+//             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//             "name": "GreatStack",
+//             "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//         },
+//         "courseTitle": "Introduction to JavaScript",
+//         "purchaseDate": "2024-12-20T08:39:55.509Z"
+//     },
+//     {
+//         "student": {
+//             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//             "name": "GreatStack",
+//             "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//         },
+//         "courseTitle": "Introduction to JavaScript",
+//         "purchaseDate": "2024-12-20T08:59:49.964Z"
+//     },
+//     {
+//         "student": {
+//             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//             "name": "GreatStack",
+//             "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//         },
+//         "courseTitle": "Advanced Python Programming",
+//         "purchaseDate": "2024-12-20T11:03:42.931Z"
+//     },
+//     {
+//         "student": {
+//             "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
+//             "name": "GreatStack",
+//             "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
+//         },
+//         "courseTitle": "Web Development Bootcamp",
+//         "purchaseDate": "2024-12-20T11:04:48.798Z"
+//     }
+// ]
 
 export const dummyStudentEnrolled = [
-    {
-        "student": {
-            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
-            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-        },
-        "courseTitle": "Introduction to JavaScript",
-        "purchaseDate": "2024-12-20T08:39:55.509Z"
+  {
+    student: {
+      _id: "user_101",
+      name: "Rohan Sharma",
+      imageUrl: "https://randomuser.me/api/portraits/men/32.jpg"
     },
-    {
-        "student": {
-            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
-            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-        },
-        "courseTitle": "Introduction to JavaScript",
-        "purchaseDate": "2024-12-20T08:59:49.964Z"
+    courseTitle: "Introduction to JavaScript",
+    purchaseDate: "2024-12-20T08:39:55.509Z"
+  },
+  {
+    student: {
+      _id: "user_102",
+      name: "Ananya Verma",
+      imageUrl: "https://randomuser.me/api/portraits/women/44.jpg"
     },
-    {
-        "student": {
-            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
-            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-        },
-        "courseTitle": "Advanced Python Programming",
-        "purchaseDate": "2024-12-20T11:03:42.931Z"
+    courseTitle: "React for Beginners",
+    purchaseDate: "2024-12-21T09:12:49.964Z"
+  },
+  {
+    student: {
+      _id: "user_103",
+      name: "Karan Patel",
+      imageUrl: "https://randomuser.me/api/portraits/men/51.jpg"
     },
-    {
-        "student": {
-            "_id": "user_2qQlvXyr02B4Bq6hT0Gvaa5fT9V",
-            "name": "GreatStack",
-            "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ycVFsdmFMSkw3ckIxNHZMU2o4ZURWNEtmR2IifQ"
-        },
-        "courseTitle": "Web Development Bootcamp",
-        "purchaseDate": "2024-12-20T11:04:48.798Z"
-    }
-]
+    courseTitle: "Advanced Python Programming",
+    purchaseDate: "2024-12-22T11:03:42.931Z"
+  },
+  {
+    student: {
+      _id: "user_104",
+      name: "Meera Iyer",
+      imageUrl: "https://randomuser.me/api/portraits/women/29.jpg"
+    },
+    courseTitle: "Web Development Bootcamp",
+    purchaseDate: "2024-12-23T11:04:48.798Z"
+  },
+  {
+    student: {
+      _id: "user_105",
+      name: "Arjun Singh",
+      imageUrl: "https://randomuser.me/api/portraits/men/63.jpg"
+    },
+    courseTitle: "Machine Learning Fundamentals",
+    purchaseDate: "2024-12-24T10:15:35.421Z"
+  }
+];
+
 
 export const dummyCourses = [
     {
