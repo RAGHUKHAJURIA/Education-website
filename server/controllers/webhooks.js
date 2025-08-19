@@ -17,29 +17,29 @@ export const clerkWebhooks = async (req, res) => {
             case "user.created": {
                 const userData = {
                     _id: data.id,
-                    email: data.email_address[0].email_address,
+                    email: data.email_addresses[0].email_address,
                     name: data.first_name + " " + data.last_name,
                     imageUrl: data.imageUrl,
                 };
                 await User.create(userData);
-                res.JSON({});
+                res.json({});
                 break;
             }
 
             case "user.updated": {
                 const userData = {
-                    email: data.email_address[0].email_address,
+                    email: data.email_addresses[0].email_address,
                     name: data.first_name + " " + data.last_name,
                     imageUrl: data.imageUrl,
                 };
                 await User.findByIdAndUpdate(data.id, userData);
-                res.JSON({});
+                res.json({});
                 break;
             }
 
             case "user.deleted": {
                 await User.findByIdAndDelete(data.id);
-                res.JSON({});
+                res.json({});
                 break;
             }
 
@@ -47,7 +47,7 @@ export const clerkWebhooks = async (req, res) => {
                 break;
         }
     } catch (error) {
-        res.JSON({
+        res.json({
             success: false,
             message: error.message,
         });
