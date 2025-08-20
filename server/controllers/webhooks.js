@@ -3,17 +3,23 @@ import User from "../models/user.js";
 
 export const clerkWebhooks = async (req, res) => {
     try {
-        const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRETE);
+        const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
-        // ✅ req.body is now a Buffer (because of bodyParser.raw)
+
         const payload = req.body.toString("utf8");
 
-        // ✅ use headers only, not body
-        await whook.verify(payload, {
-            "svix-id": req.headers["svix-id"],
-            "svix-timestamp": req.headers["svix-timestamp"],
-            "svix-signature": req.headers["svix-signature"],
-        });
+
+        try {
+            await whook.verify(payload, {
+                "svix-id": req.headers["svix-id"],
+                "svix-timestamp": req.headers["svix-timestamp"],
+                "svix-signature": req.headers["svix-signature"],
+            });
+        } catch (err) {
+            console.error("Svix verification failed:", err.message);
+            return res.status(400).json({ success: false, message: err.message });
+        }
+
 
         const { data, type } = JSON.parse(payload);
 
@@ -23,7 +29,7 @@ export const clerkWebhooks = async (req, res) => {
                     _id: data.id,
                     email: data.email_addresses[0].email_address,
                     name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
-                    imageUrl: data.profile_image_url, // ✅ correct Clerk field
+                    imageUrl: data.profile_image_url,
                 };
                 await User.create(userData);
                 return res.json({ success: true });
