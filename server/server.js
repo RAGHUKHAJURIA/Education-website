@@ -1,15 +1,16 @@
-import expres from 'express'
+import express from 'express'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 import 'dotenv/config'
 import connectDB from './configs/mongodb.js'
 import { clerkWebhooks } from './controllers/webhooks.js'
 
-const app = expres()
+const app = express()
 
 //middlewares
 app.use(cors())
 
-//data base connection
+//database connection
 await connectDB()
 
 //home route
@@ -17,7 +18,8 @@ app.get('/', (req, res) => {
     res.send("Home Route")
 })
 
-app.post('/clerk', expres.json(), clerkWebhooks )
+// Clerk webhook route (must use raw body parser, not express.json)
+app.post('/clerk', bodyParser.raw({ type: 'application/json' }), clerkWebhooks)
 
 const PORT = process.env.PORT || 5000
 
