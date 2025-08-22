@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
 })
 
 // Clerk webhook route (must use raw body parser, not express.json)
-app.post('/clerk', express.json(), clerkWebhooks)
+// app.post('/clerk', express.json(), clerkWebhooks)
+app.post('/clerk', bodyParser.raw({ type: 'application/json' }), clerkWebhooks);
 app.use('/api/educator', clerkMiddleware(), express.json(), educatorRouter)
 app.use('/api/course', express.json(), courseRouter)
 app.use('/api/user', clerkMiddleware(), express.json(), userRouter)

@@ -4,62 +4,117 @@ import Stripe from "stripe";
 import Purchase from "../models/purchase.js";
 import Course from "../models/course.js";
 
+// export const clerkWebhooks = async (req, res) => {
+//     try {
+//         const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+
+//         await whook.verify(JSON.stringify(req.body), {
+//             "svix-id": req.headers["svix-id"],
+//             "svix-timestamp": req.headers["svix-timestamp"],
+//             "svix-signature": req.headers["svix-signature"],
+//         });
+
+
+
+//         const { data, type } = req.body;
+
+//         switch (type) {
+//             case "user.created": {
+//                 const userData = {
+//                     _id: data.id,
+//                     email: data.email_addresses[0].email_address,
+//                     name: data.first_name + " " + data.last_name,
+//                     imageUrl: data.imageUrl,
+//                 };
+
+//                 await User.create(userData);
+//                 res.json({})
+//                 break
+//             }
+
+//             case "user.updated": {
+//                 const userData = {
+//                     email: data.email_addresses[0].email_address,
+//                     name: data.first_name + " " + data.last_name,
+//                     imageUrl: data.imageUrl,
+//                 };
+//                 await User.findByIdAndUpdate(data.id, userData);
+//                 res.json({})
+//                 break;
+//             }
+
+//             case "user.deleted": {
+//                 await User.findByIdAndDelete(data.id);
+//                 res.json({})
+//                 break;
+//             }
+
+//             default:
+//                 break;
+//         }
+//     } catch (error) {
+
+//         res.json({
+//             success: false,
+//             message: error.message,
+//         });
+//     }
+// };
+
+
 export const clerkWebhooks = async (req, res) => {
-    try {
-        const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+  try {
+    const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+    const payload = req.body.toString("utf8");
 
-        await whook.verify(JSON.stringify(req.body), {
-            "svix-id": req.headers["svix-id"],
-            "svix-timestamp": req.headers["svix-timestamp"],
-            "svix-signature": req.headers["svix-signature"],
-        });
+    await whook.verify(payload, {
+      "svix-id": req.headers["svix-id"],
+      "svix-timestamp": req.headers["svix-timestamp"],
+      "svix-signature": req.headers["svix-signature"],
+    });
 
+    const { data, type } = JSON.parse(payload);
 
+    switch (type) {
+      case "user.created": {
+        const userData = {
+          _id: data.id,
+          email: data.email_addresses[0].email_address,
+          name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+          imageUrl: data.profile_image_url || "default.png",
+        };
+        await User.create(userData);
+        console.log("User created:", userData);
+        return res.json({ success: true });
+      }
 
-        const { data, type } = req.body;
+      case "user.updated": {
+        const userData = {
+          email: data.email_addresses[0].email_address,
+          name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+          imageUrl: data.profile_image_url || "default.png",
+        };
+        await User.findByIdAndUpdate(data.id, userData);
+        console.log("User updated:", data.id);
+        return res.json({ success: true });
+      }
 
-        switch (type) {
-            case "user.created": {
-                const userData = {
-                    _id: data.id,
-                    email: data.email_addresses[0].email_address,
-                    name: data.first_name + " " + data.last_name,
-                    imageUrl: data.imageUrl,
-                };
+      case "user.deleted": {
+        await User.findByIdAndDelete(data.id);
+        console.log("User deleted:", data.id);
+        return res.json({ success: true });
+      }
 
-                await User.create(userData);
-                res.json({})
-                break
-            }
-
-            case "user.updated": {
-                const userData = {
-                    email: data.email_addresses[0].email_address,
-                    name: data.first_name + " " + data.last_name,
-                    imageUrl: data.imageUrl,
-                };
-                await User.findByIdAndUpdate(data.id, userData);
-                res.json({})
-                break;
-            }
-
-            case "user.deleted": {
-                await User.findByIdAndDelete(data.id);
-                res.json({})
-                break;
-            }
-
-            default:
-                break;
-        }
-    } catch (error) {
-
-        res.json({
-            success: false,
-            message: error.message,
-        });
+      default:
+        console.log("Event ignored:", type);
+        return res.json({ message: "Event ignored" });
     }
+  } catch (error) {
+    console.error("Clerk webhook error:", error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
 };
+
 
 const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
 
