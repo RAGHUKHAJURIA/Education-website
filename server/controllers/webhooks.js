@@ -8,12 +8,7 @@ export const clerkWebhooks = async (req, res) => {
     try {
         const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
-
-        const payload = req.body.toString("utf8");
-
-
-
-        await whook.verify(payload, {
+        await whook.verify(JSON.stringify(req.body), {
             "svix-id": req.headers["svix-id"],
             "svix-timestamp": req.headers["svix-timestamp"],
             "svix-signature": req.headers["svix-signature"],
@@ -21,41 +16,45 @@ export const clerkWebhooks = async (req, res) => {
 
 
 
-        const { data, type } = JSON.parse(payload);
+        const { data, type } = req.body;
 
         switch (type) {
             case "user.created": {
                 const userData = {
                     _id: data.id,
                     email: data.email_addresses[0].email_address,
-                    name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
-                    imageUrl: data.profile_image_url,
+                    name: data.first_name + " " + data.last_name,
+                    imageUrl: data.imageUrl,
                 };
+
                 await User.create(userData);
-                return res.json({ success: true });
+                res.json({})
+                break
             }
 
             case "user.updated": {
                 const userData = {
                     email: data.email_addresses[0].email_address,
-                    name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
-                    imageUrl: data.profile_image_url,
+                    name: data.first_name + " " + data.last_name,
+                    imageUrl: data.imageUrl,
                 };
                 await User.findByIdAndUpdate(data.id, userData);
-                return res.json({ success: true });
+                res.json({})
+                break;
             }
 
             case "user.deleted": {
                 await User.findByIdAndDelete(data.id);
-                return res.json({ success: true });
+                res.json({})
+                break;
             }
 
             default:
-                return res.json({ message: "Event ignored" });
+                break;
         }
     } catch (error) {
-        console.error("Webhook error:", error);
-        return res.status(400).json({
+
+        res.json({
             success: false,
             message: error.message,
         });

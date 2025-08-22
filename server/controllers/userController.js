@@ -8,13 +8,13 @@ import CourseProgress from "../models/courseProgress.js";
 export const getUserData = async (req, res) => {
     try {
         const { userId } = req.auth;
-        console.log("User ID:", userId);
+        // console.log("User ID:", userId);
         const user = await User.findById(userId);
-        console.log("User Data:", user);
+        // console.log("User Data:", 
         if (!user) {
             return res.json({ success: false, message: "User not found" });
         }
-        res.json({ success: true, user });
+        res.json({ success: true, user: user });
     } catch (error) {
         res.json({ success: false, message: error.message });
     }
@@ -22,24 +22,46 @@ export const getUserData = async (req, res) => {
 
 // user enrolled courses
 
+// export const userEnrolledCourses = async (req, res) => {
+//     try {
+//         const { userId } = req.auth;
+//         console.log(userId)
+//         const userData = await User.findById(userId).populate('enrolledCourses');
+//         console.log(userData.enrolledCourses)
+
+//         res.json({ success: true, enrolledCourses: userData.enrolledCourses });
+//     } catch (error) {
+//         res.json({ success: false, message: error.message });
+//     }
+// }
+
 export const userEnrolledCourses = async (req, res) => {
     try {
-        const { userId } = req.auth;
-        const userData = await User.findById(userId).populate('enrolledCourses');
+        const { userId } = req.auth; // Clerk userId (user_xxx)
+
+        const userData = await User.findOne({ clerkId: userId })
+            .populate("enrolledCourses");
+
+        if (!userData) {
+            return res.json({ success: false, message: "User not found in DB" });
+        }
 
         res.json({ success: true, enrolledCourses: userData.enrolledCourses });
     } catch (error) {
         res.json({ success: false, message: error.message });
     }
-}
+};
+
 
 //PAYMENT CONTROLLER
 
 export const purchaseCourse = async (req, res) => {
     try {
         const { courseId } = req.body;
+        console.log("course id: ", courseId)
         const { origin } = req.headers;
         const { userId } = req.auth;
+        console.log("userId: ", userId)
         const userData = await User.findById(userId);
         const courseData = await Course.findById(courseId);
 
@@ -162,7 +184,7 @@ export const addUserRating = async (req, res) => {
 
         if (existingRatingIndex > -1) {
             course.courseRating[existingRatingIndex].rating = rating;
-        } else{
+        } else {
             course.courseRating.push({ userId, rating });
         }
 
