@@ -62,9 +62,6 @@ import Course from "../models/course.js";
 // };
 
 
-import { Webhook } from "svix";
-import User from "../models/user.js";
-
 export const clerkWebhooks = async (req, res) => {
   try {
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
