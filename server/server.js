@@ -25,25 +25,7 @@ app.get('/', (req, res) => {
     res.send("Home Route")
 })
 
-// Clerk webhook route (must use raw body parser, not express.json)
-// app.post('/clerk', express.json(), clerkWebhooks)
-app.use('/clerk', express.raw({ type: 'application/json' }), (req, res, next) => {
-    req.rawBody = req.body.toString('utf8');
-    try {
-        req.body = JSON.parse(req.rawBody);
-    } catch (error) {
-        console.error('Failed to parse webhook body:', error);
-        return res.status(400).json({ error: 'Invalid JSON' });
-    }
-    next();
-});
-
-app.use(express.json());
-
-app.post('/clerk', clerkWebhooks);
-
-
-
+app.post('/clerk', bodyParser.raw({ type: 'application/json' }), clerkWebhooks)
 app.use('/api/educator', clerkMiddleware(), express.json(), educatorRouter)
 app.use('/api/course', express.json(), courseRouter)
 app.use('/api/user', clerkMiddleware(), express.json(), userRouter)
