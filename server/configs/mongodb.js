@@ -22,8 +22,7 @@ const connectDB = async () => {
 
   await mongoose.connect(process.env.MONGODB_URL, {
     dbName: "lms", // 👈 this is the actual database name
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+
   });
 };
 

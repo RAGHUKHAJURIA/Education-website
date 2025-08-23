@@ -25,7 +25,10 @@ app.get('/', (req, res) => {
     res.send("Home Route")
 })
 
-app.post('/clerk', express.json(), clerkWebhooks)
+// app.post('/clerk', express.json(), clerkWebhooks)
+// Clerk webhook (must use express.raw for svix verification)
+app.post("/clerk", express.raw({ type: "application/json" }), clerkWebhooks);
+
 app.use('/api/educator', clerkMiddleware(), express.json(), educatorRouter)
 app.use('/api/course', express.json(), courseRouter)
 app.use('/api/user', clerkMiddleware(), express.json(), userRouter)
