@@ -5,6 +5,8 @@ import Purchase from "../models/purchase.js";
 import Course from "../models/course.js";
 
 export const clerkWebhooks = async (req, res) => {
+  console.log("Webhook received:", req.body);
+
   try {
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
@@ -23,23 +25,24 @@ export const clerkWebhooks = async (req, res) => {
         const userData = {
           _id: data.id,
           email: data.email_addresses[0].email_address,
-          name: data.first_name + " " + data.last_name,
-          imageUrl: data.imageUrl,
+          name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+          imageUrl: data.image_url,
         };
 
         await User.create(userData);
-        res.json({})
-        break
+        res.json({ success: true });
+        break;
       }
+
 
       case "user.updated": {
         const userData = {
           email: data.email_addresses[0].email_address,
-          name: data.first_name + " " + data.last_name,
-          imageUrl: data.imageUrl,
+          name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+          imageUrl: data.image_url,
         };
         await User.findByIdAndUpdate(data.id, userData);
-        res.json({})
+        res.json({ success: true });
         break;
       }
 
