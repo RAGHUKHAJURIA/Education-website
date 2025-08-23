@@ -22,35 +22,20 @@ export const getUserData = async (req, res) => {
 
 // user enrolled courses
 
-// export const userEnrolledCourses = async (req, res) => {
-//     try {
-//         const { userId } = req.auth;
-//         console.log(userId)
-//         const userData = await User.findById(userId).populate('enrolledCourses');
-//         console.log(userData.enrolledCourses)
-
-//         res.json({ success: true, enrolledCourses: userData.enrolledCourses });
-//     } catch (error) {
-//         res.json({ success: false, message: error.message });
-//     }
-// }
-
 export const userEnrolledCourses = async (req, res) => {
     try {
-        const { userId } = req.auth; // Clerk userId (user_xxx)
-
-        const userData = await User.findOne({ clerkId: userId })
-            .populate("enrolledCourses");
-
-        if (!userData) {
-            return res.json({ success: false, message: "User not found in DB" });
-        }
+        const { userId } = req.auth;
+        console.log(userId)
+        const userData = await User.findById(userId).populate('enrolledCourses');
+        console.log(userData.enrolledCourses)
 
         res.json({ success: true, enrolledCourses: userData.enrolledCourses });
     } catch (error) {
         res.json({ success: false, message: error.message });
     }
-};
+}
+
+
 
 
 //PAYMENT CONTROLLER
