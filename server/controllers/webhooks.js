@@ -67,6 +67,7 @@ import Course from "../models/course.js";
 
 
 export const clerkWebhooks = async (req, res) => {
+  console.log("📩 Clerk Webhook received:", req.body);
   try {
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
