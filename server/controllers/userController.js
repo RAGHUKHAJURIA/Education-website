@@ -25,9 +25,10 @@ export const getUserData = async (req, res) => {
 export const userEnrolledCourses = async (req, res) => {
     try {
         const { userId } = req.auth;
-        console.log(userId)
-        const userData = await User.findById(userId).populate('enrolledCourses');
-        console.log(userData.enrolledCourses)
+        // console.log(req)
+        // console.log(userId)
+        const userData = await User.findById(userId).populate("enrolledCourses");
+        // console.log(userData.enrolledCourses)
 
         res.json({ success: true, enrolledCourses: userData.enrolledCourses });
     } catch (error) {
@@ -43,10 +44,10 @@ export const userEnrolledCourses = async (req, res) => {
 export const purchaseCourse = async (req, res) => {
     try {
         const { courseId } = req.body;
-        console.log("course id: ", courseId)
+        // console.log("course id: ", courseId)
         const { origin } = req.headers;
         const { userId } = req.auth;
-        console.log("userId: ", userId)
+        // console.log("userId: ", userId)
         const userData = await User.findById(userId);
         const courseData = await Course.findById(courseId);
 
@@ -57,7 +58,8 @@ export const purchaseCourse = async (req, res) => {
         const purchaseData = {
             courseId: courseData._id,
             userId,
-            amount: (courseData.coursePrice - courseData.discount * courseData.coursePrice / 100).toFixed(2)
+            amount: (courseData.coursePrice - courseData.discount * courseData.coursePrice / 100).toFixed(2),
+            status: 'pending'
         }
 
         const newPurchase = await Purchase.create(purchaseData);
@@ -135,8 +137,8 @@ export const updateCourseProgress = async (req, res) => {
 export const getUserCourseProgress = async (req, res) => {
     try {
         const { userId } = req.auth;
-        const { courseId } = req.body;
-        const progressData = await CourseProgress.findOne({ userId, courseId });
+        // const { courseId } = req.body;
+        const progressData = await CourseProgress.findOne({ userId });
 
         res.json({ success: true, progressData });
     } catch (error) {

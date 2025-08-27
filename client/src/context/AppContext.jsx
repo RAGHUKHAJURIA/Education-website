@@ -27,8 +27,7 @@ export const AppContextProvider = (props) => {
     const fetchAllCourses = async () => {
         try {
             const res = await axios.get(backendUrl + '/api/course/all');
-            const data = res.data; // ✅ extract actual data
-
+            const data = res.data;
             if (data.success) {
                 setAllCourses(data.courses);
             } else {
@@ -69,7 +68,7 @@ export const AppContextProvider = (props) => {
 
     // claculate the course rating
     const calculateRating = (course) => {
-        if (course.courseRatings.lenght === 0) {
+        if (course.courseRatings.length === 0) {
             return 0;
         }
         let totalRating = 0;
@@ -77,7 +76,7 @@ export const AppContextProvider = (props) => {
             totalRating += rating.rating;
         })
 
-        return totalRating / course.courseRatings.lenght;
+        return Math.floor(totalRating / course.courseRatings.length);
     }
 
     const caluclateChapterTime = (chapter) => {
@@ -108,14 +107,15 @@ export const AppContextProvider = (props) => {
     // fetch user enrolled courses
     const fetchUsedEnrolledCourses = async () => {
         try {
-            const token = getToken()
+            const token = await getToken()
+            // console.log(token)
             const { data } = await axios.get(backendUrl + '/api/user/enrolled-courses', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
 
-            console.log(data);
+            // console.log(data)
 
             if (data.success) {
                 setenrolledCourses(data.enrolledCourses);
@@ -135,16 +135,16 @@ export const AppContextProvider = (props) => {
 
     const { session } = useSession()
 
-    const logToken = async () => {
+    // const logToken = async () => {
 
-        console.log(await getToken());
-        console.log(session);
-    }
+    //     console.log(await getToken());
+    //     console.log(session);
+    // }
 
     useEffect(() => {
         if (user) {
-            console.log(getToken())
-            logToken();
+            // console.log(getToken())
+            // logToken();
             fetchUserData()
             fetchUsedEnrolledCourses()
         }

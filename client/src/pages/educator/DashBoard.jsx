@@ -3,18 +3,38 @@ import { Outlet, useSearchParams } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import { assets, dummyDashboardData } from "../../assets/assets";
 import Loading from "../../components/student/Loading";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const DashBoard = () => {
   const [dashboardData, setDashboardData] = useState(null);
-  const { currency } = useContext(AppContext);
+  const { currency, isEducator, getToken, backendUrl } = useContext(AppContext);
 
   const fetchDashboardData = async () => {
-    setDashboardData(dummyDashboardData);
+    try {
+      const token = await getToken()
+      const { data } = await axios.get(backendUrl + '/api/educator/dashboard-data', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      if (data.success) {
+        setDashboardData(data.dashboardData)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   };
 
   useEffect(() => {
-    fetchDashboardData();
-  }, []);
+    if (isEducator) {
+      fetchDashboardData();
+    }
+
+  }, [isEducator]);
 
   return dashboardData ? (
     <div className="min-h-screen flex flex-col items-start justify-between gap-8 md:p-8 md:pb-0 p-4 pt-8 pb-0">
@@ -25,7 +45,7 @@ const DashBoard = () => {
             <img src={assets.patients_icon} alt="" />
             <div>
               <p className="text-2xl font-medium text-gray-600">
-                {dashboardData.enrolledStudentsData.length}
+                {dashboardData.enrolledStudents.length}
               </p>
               <p className="text-base text-gray-500">Total Enrolments</p>
             </div>
@@ -63,11 +83,11 @@ const DashBoard = () => {
                   <th className="px-4 py-3 border-b">#</th>
                   <th className="px-4 py-3 border-b">Student name</th>
                   <th className="px-4 py-3 border-b">Course Title</th>
-                  <th className="px-4 py-3 border-b">Date</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                {dashboardData.enrolledStudentsData.map((enrol, index) => (
+                {dashboardData.enrolledStudents.map((enrol, index) => (
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="px-4 py-3 border-b">{index + 1}</td>
                     <td className="px-4 py-3 border-b flex items-center gap-2">
@@ -79,10 +99,6 @@ const DashBoard = () => {
                       {enrol.student.name}
                     </td>
                     <td className="px-4 py-3 border-b">{enrol.courseTitle}</td>
-                    <td className="px-4 py-3 border-b">
-                      {/* You don’t have date in dummy data, so fallback */}
-                      {enrol.date ? enrol.date : "—"}
-                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -97,4 +113,3 @@ const DashBoard = () => {
 };
 
 export default DashBoard;
-  
