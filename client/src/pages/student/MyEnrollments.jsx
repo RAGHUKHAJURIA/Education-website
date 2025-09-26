@@ -45,9 +45,9 @@ const MyEnrollments = () => {
 
   return (
     <>
-      <div className='md:px-36 px-8 pt-10'>
-        <h1 className='text-2xl font-semibold '>My Enrollments</h1>
-        <table className='table-auto w-full border border-gray-200 border-collapse mt-10'>
+      <div className='md:px-36 px-8 pt-10 animate-fade-in-up'>
+        <h1 className='text-2xl font-semibold transition-colors duration-300 hover:text-blue-600'>My Enrollments</h1>
+        <table className='table-auto w-full border border-gray-200 border-collapse mt-10 transition-all duration-300 hover:shadow-lg'>
           <thead className='text-gray-900 border  border-gray-200 text-sm text-left max-sm:hidden'>
             <tr>
               <th className='px-4 py-3 font-semibold truncate'>Course</th>
@@ -58,22 +58,22 @@ const MyEnrollments = () => {
           </thead>
           <tbody className='text-gray-700'>
             {enrolledCourses.map((course, index) => (
-              <tr key={index} className='border-b border-gray-500/20'>
+              <tr key={index} className='border-b border-gray-500/20 transition-all duration-300 hover:bg-gray-50 animate-scale-in' style={{ animationDelay: `${index * 0.1}s` }}>
                 <td className='md:px-4 pl-2 md:pl-4 py-3 flex items-center space-x-3'>
-                  <img src={course.courseThumbnail} alt="" className='w-14 sm:w-24 md:w-28' />
+                  <img src={course.courseThumbnail} alt="" className='w-14 sm:w-24 md:w-28 transition-transform duration-300 hover:scale-105' />
                   <div className='flex-1'>
-                    <p className='mb-1 max-sm:text-sm'>{course.courseTitle}</p>
+                    <p className='mb-1 max-sm:text-sm transition-colors duration-300 hover:text-blue-600'>{course.courseTitle}</p>
                     <Line strokeWidth={2} percent={progressArray[index] ? progressArray[index].lectureCompleted * 100 / progressArray[index].totalLectures : 0} className='bg-gray-300 rounded-full' />
                   </div>
                 </td>
-                <td className='px-4 py-3 max-sm:hidden'>
+                <td className='px-4 py-3 max-sm:hidden transition-colors duration-300 hover:text-blue-600'>
                   {calculateCourseDuration(course)}
                 </td>
-                <td className='px-4 py-3 max-sm:hidden'>
+                <td className='px-4 py-3 max-sm:hidden transition-colors duration-300 hover:text-blue-600'>
                   {progressArray[index] && `${progressArray[index].lectureCompleted} / ${progressArray[index].totalLectures} `} <span>Lectures</span>
                 </td>
                 <td className='px-4 py-3 max-sm:text-right'>
-                  <button className='px-3 sm:px-5 py-1.5 sm:py-2 bg-blue-600 max-sm:text-xs text-white' onClick={() => navigate('/player/' + course._id)}>
+                  <button className='px-3 sm:px-5 py-1.5 sm:py-2 bg-blue-600 max-sm:text-xs text-white transition-all duration-300 hover:bg-blue-700 hover:scale-105 hover:shadow-lg' onClick={() => navigate('/player/' + course._id)}>
                     {progressArray[index] && progressArray[index].lectureCompleted / progressArray[index].totalLectures === 1 ? 'Completed' : 'On Going'}
                   </button>
                 </td>

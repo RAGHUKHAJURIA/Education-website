@@ -210,11 +210,35 @@ export const stripeWebhooks = async (req, res) => {
         payment_intent: paymentIntentId
       });
 
+      if (!session.data || session.data.length === 0) {
+        console.error('No session found for payment intent:', paymentIntentId);
+        return res.status(400).json({ error: 'No session found' });
+      }
+
       const { purchaseId } = session.data[0].metadata;
 
+      if (!purchaseId) {
+        console.error('No purchaseId in session metadata');
+        return res.status(400).json({ error: 'No purchaseId found' });
+      }
+
       const purchaseData = await Purchase.findById(purchaseId);
+      if (!purchaseData) {
+        console.error('Purchase not found:', purchaseId);
+        return res.status(400).json({ error: 'Purchase not found' });
+      }
+
       const userData = await User.findById(purchaseData.userId);
+      if (!userData) {
+        console.error('User not found:', purchaseData.userId);
+        return res.status(400).json({ error: 'User not found' });
+      }
+
       const courseData = await Course.findById(purchaseData.courseId.toString());
+      if (!courseData) {
+        console.error('Course not found:', purchaseData.courseId);
+        return res.status(400).json({ error: 'Course not found' });
+      }
 
       // Enroll user in course
       courseData.enrolledStudents.push(userData._id);
@@ -238,9 +262,24 @@ export const stripeWebhooks = async (req, res) => {
         payment_intent: paymentIntentId
       });
 
+      if (!session.data || session.data.length === 0) {
+        console.error('No session found for payment intent:', paymentIntentId);
+        return res.status(400).json({ error: 'No session found' });
+      }
+
       const { purchaseId } = session.data[0].metadata;
 
+      if (!purchaseId) {
+        console.error('No purchaseId in session metadata');
+        return res.status(400).json({ error: 'No purchaseId found' });
+      }
+
       const purchaseData = await Purchase.findById(purchaseId);
+      if (!purchaseData) {
+        console.error('Purchase not found:', purchaseId);
+        return res.status(400).json({ error: 'Purchase not found' });
+      }
+
       purchaseData.status = 'failed';
       await purchaseData.save();
 

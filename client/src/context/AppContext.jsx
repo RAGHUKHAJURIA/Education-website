@@ -41,13 +41,20 @@ export const AppContextProvider = (props) => {
 
     //fetch userData
     const fetchUserData = async () => {
+        if (!user || !session) {
+            return; // Don't fetch if no user or session is logged in
+        }
 
-        if (user.publicMetadata.role === 'educator') {
+        if (user?.publicMetadata?.role === 'educator') {
             setIsEducator(true)
         }
 
         try {
             const token = await getToken()
+
+            if (!token) {
+                return; // Don't proceed if no token
+            }
 
             const { data } = await axios.get(backendUrl + '/api/user/data', {
                 headers: {
@@ -58,10 +65,16 @@ export const AppContextProvider = (props) => {
             if (data.success) {
                 setUserData(data.user)
             } else {
-                toast.error(data.message)
+                // Only show error if it's not a "User not found" error
+                if (data.message !== "User not found") {
+                    toast.error(data.message)
+                }
             }
         } catch (error) {
-            toast.error(error.message)
+            // Only show error if it's not a 401/403 error
+            if (error.response?.status !== 401 && error.response?.status !== 403) {
+                toast.error(error.message)
+            }
         }
     }
 
@@ -106,8 +119,17 @@ export const AppContextProvider = (props) => {
 
     // fetch user enrolled courses
     const fetchUsedEnrolledCourses = async () => {
+        if (!user || !session) {
+            return; // Don't fetch if no user or session is logged in
+        }
+
         try {
             const token = await getToken()
+
+            if (!token) {
+                return; // Don't proceed if no token
+            }
+
             // console.log(token)
             const { data } = await axios.get(backendUrl + '/api/user/enrolled-courses', {
                 headers: {
@@ -120,10 +142,16 @@ export const AppContextProvider = (props) => {
             if (data.success) {
                 setenrolledCourses(data.enrolledCourses);
             } else {
-                toast.error(data.message)
+                // Only show error if it's not a "User not found" error
+                if (data.message !== "User not found") {
+                    toast.error(data.message)
+                }
             }
         } catch (error) {
-            toast.error(error.message)
+            // Only show error if it's not a 401/403 error
+            if (error.response?.status !== 401 && error.response?.status !== 403) {
+                toast.error(error.message)
+            }
         }
     }
 
@@ -142,13 +170,13 @@ export const AppContextProvider = (props) => {
     // }
 
     useEffect(() => {
-        if (user) {
+        if (user && session) {
             // console.log(getToken())
             // logToken();
             fetchUserData()
             fetchUsedEnrolledCourses()
         }
-    }, [user])
+    }, [user, session])
 
     const value = {
         currency, allCourses, navigate, calculateRating, isEducator, setIsEducator, calculateCourseDuration, calculateNoOfLectures, caluclateChapterTime, enrolledCourses, fetchUsedEnrolledCourses, backendUrl, userData, setUserData, getToken, fetchAllCourses

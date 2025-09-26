@@ -18,6 +18,10 @@ export const getCourseById = async (req, res) => {
     try {
         const courseData = await Course.findById(id).populate({ path: 'educator' });
 
+        if (!courseData) {
+            return res.json({ success: false, message: "Course not found" });
+        }
+
         if (Array.isArray(courseData.courseContent)) {
             courseData.courseContent.forEach(chapter => {
                 if (Array.isArray(chapter.chapterContent)) {

@@ -95,9 +95,9 @@ export const addCourse = async (req, res) => {
 // Get Educator Courses
 export const getEducatorCourses = async (req, res) => {
     try {
-        const userId = req.auth;
+        const { userId } = req.auth;
 
-        const courses = await Course.find({ userId });
+        const courses = await Course.find({ educator: userId });
         res.json({ success: true, courses: courses });
     } catch (error) {
         res.json({ success: false, message: error.message });
@@ -109,8 +109,8 @@ export const getEducatorCourses = async (req, res) => {
 
 export const educatorDashboardData = async (req, res) => {
     try {
-        const userId = req.auth;
-        const courses = await Course.find({ userId });
+        const { userId } = req.auth;
+        const courses = await Course.find({ educator: userId });
         const totalCourses = courses.length;
 
         const coursesId = courses.map(course => course._id);
@@ -152,8 +152,8 @@ export const educatorDashboardData = async (req, res) => {
 //get Enrolled student data 
 export const getEnrolledStudents = async (req, res) => {
     try {
-        const userId = req.auth;
-        const courses = await Course.find({ userId });
+        const { userId } = req.auth;
+        const courses = await Course.find({ educator: userId });
         const coursesId = courses.map(course => course._id);
 
         const purchases = await Purchase.find({

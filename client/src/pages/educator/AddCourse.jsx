@@ -143,17 +143,17 @@ const AddCourse = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Add Course</h2>
+    <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-4xl mx-auto animate-fade-in-up">
+      <h2 className="text-2xl font-bold mb-4 transition-all duration-500 hover:text-blue-600 hover:scale-105 animate-fade-in-up">Add Course</h2>
 
       <div className="flex flex-col gap-4">
         {/* Course Title */}
-        <div className="flex flex-col gap-1">
-          <label className="font-medium">Course Title</label>
+        <div className="flex flex-col gap-1 animate-scale-in-bounce" style={{ animationDelay: '0.1s' }}>
+          <label className="font-medium transition-all duration-300 hover:text-blue-600 hover:scale-105">Course Title</label>
           <input
             type="text"
             placeholder="Type here"
-            className="outline-none py-2 px-3 rounded border border-gray-500"
+            className="outline-none py-2 px-3 rounded-lg border border-gray-500 transition-all duration-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400 hover:scale-105 hover:shadow-lg focus:scale-105"
             value={courseTitle}
             onChange={(e) => setCourseTitle(e.target.value)}
             required
@@ -161,11 +161,11 @@ const AddCourse = () => {
         </div>
 
         {/* Course Description */}
-        <div className="flex flex-col gap-1">
-          <label className="font-medium">Course Description</label>
+        <div className="flex flex-col gap-1 animate-scale-in-bounce" style={{ animationDelay: '0.2s' }}>
+          <label className="font-medium transition-all duration-300 hover:text-blue-600 hover:scale-105">Course Description</label>
           <textarea
             placeholder="Enter course description..."
-            className="outline-none py-2 px-3 rounded border border-gray-500 h-32 resize-vertical"
+            className="outline-none py-2 px-3 rounded-lg border border-gray-500 h-32 resize-vertical transition-all duration-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400 hover:scale-105 hover:shadow-lg focus:scale-105"
             value={courseDescription}
             onChange={(e) => setCourseDescription(e.target.value)}
             required
@@ -173,12 +173,12 @@ const AddCourse = () => {
         </div>
 
         {/* Course Price */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 animate-scale-in" style={{ animationDelay: '0.3s' }}>
           <label className="font-medium">Course Price</label>
           <input
             type="number"
             placeholder="0"
-            className="outline-none py-2 px-3 rounded border border-gray-500 w-40"
+            className="outline-none py-2 px-3 rounded border border-gray-500 w-40 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400"
             value={coursePrice}
             onChange={(e) => setCoursePrice(e.target.value)}
             required
@@ -186,83 +186,84 @@ const AddCourse = () => {
         </div>
 
         {/* Discount */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 animate-scale-in" style={{ animationDelay: '0.4s' }}>
           <label className="font-medium">Discount (%)</label>
           <input
             type="number"
             placeholder="0"
             min="0"
             max="100"
-            className="outline-none py-2 px-3 rounded border border-gray-500 w-40"
+            className="outline-none py-2 px-3 rounded border border-gray-500 w-40 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400"
             value={discount}
             onChange={(e) => setDiscount(e.target.value)}
           />
         </div>
 
         {/* Course Thumbnail */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 animate-scale-in" style={{ animationDelay: '0.5s' }}>
           <label className="font-medium">Course Thumbnail</label>
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setImage(e.target.files[0])}
-            className="py-1"
+            className="py-1 transition-all duration-300 hover:bg-gray-50"
           />
           {image && (
             <img
               src={URL.createObjectURL(image)}
               alt="Thumbnail Preview"
-              className="h-20 w-auto rounded border"
+              className="h-20 w-auto rounded border transition-all duration-300 hover:scale-105 hover:shadow-md"
             />
           )}
         </div>
 
         {/* Is Published */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 animate-scale-in" style={{ animationDelay: '0.6s' }}>
           <input
             type="checkbox"
             id="isPublished"
             checked={isPublished}
             onChange={(e) => setIsPublished(e.target.checked)}
+            className="transition-all duration-300 hover:scale-110"
           />
-          <label htmlFor="isPublished" className="font-medium">Publish Course</label>
+          <label htmlFor="isPublished" className="font-medium transition-colors duration-300 hover:text-blue-600">Publish Course</label>
         </div>
 
         {/* Chapters Section */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 animate-scale-in" style={{ animationDelay: '0.7s' }}>
           <div className="flex justify-between items-center">
-            <label className="font-medium text-lg">Course Content (Chapters)</label>
+            <label className="font-medium text-lg transition-colors duration-300 hover:text-blue-600">Course Content (Chapters)</label>
             <button
               type="button"
               onClick={addChapter}
-              className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
+              className="bg-blue-500 text-white py-1 px-3 rounded transition-all duration-300 hover:bg-blue-600 hover:scale-105 hover:shadow-lg"
             >
               Add Chapter
             </button>
           </div>
 
           {chapters.map((chapter, index) => (
-            <div key={chapter.chapterId} className="border rounded p-4 bg-gray-50">
+            <div key={chapter.chapterId} className="border rounded p-4 bg-gray-50 transition-all duration-300 hover:shadow-md hover:bg-gray-100 animate-scale-in" style={{ animationDelay: `${0.8 + index * 0.1}s` }}>
               <div className="flex justify-between items-center mb-3">
                 <input
                   type="text"
                   value={chapter.chapterTitle}
                   onChange={(e) => updateChapterTitle(chapter.chapterId, e.target.value)}
-                  className="outline-none py-1 px-2 rounded border border-gray-400 bg-white flex-1 mr-2"
+                  className="outline-none py-1 px-2 rounded border border-gray-400 bg-white flex-1 mr-2 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-500"
                   placeholder="Chapter Title"
                 />
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={() => openLecturePopup(chapter.chapterId)}
-                    className="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600 text-sm"
+                    className="bg-green-500 text-white py-1 px-2 rounded transition-all duration-300 hover:bg-green-600 hover:scale-105 hover:shadow-md text-sm"
                   >
                     Add Lecture
                   </button>
                   <button
                     type="button"
                     onClick={() => deleteChapter(chapter.chapterId)}
-                    className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600 text-sm"
+                    className="bg-red-500 text-white py-1 px-2 rounded transition-all duration-300 hover:bg-red-600 hover:scale-105 hover:shadow-md text-sm"
                   >
                     Delete
                   </button>
@@ -272,25 +273,25 @@ const AddCourse = () => {
               {/* Lectures in this chapter */}
               <div className="pl-4">
                 {chapter.chapterContent.map((lecture, lectureIndex) => (
-                  <div key={lecture.lectureId} className="flex justify-between items-center py-2 border-b border-gray-300">
+                  <div key={lecture.lectureId} className="flex justify-between items-center py-2 border-b border-gray-300 transition-all duration-300 hover:bg-white hover:shadow-sm animate-scale-in" style={{ animationDelay: `${0.9 + index * 0.1 + lectureIndex * 0.05}s` }}>
                     <div>
-                      <span className="font-medium">{lecture.lectureTitle}</span>
+                      <span className="font-medium transition-colors duration-300 hover:text-blue-600">{lecture.lectureTitle}</span>
                       <span className="text-sm text-gray-600 ml-2">
                         ({lecture.lectureDuration} min)
-                        {lecture.isPreviewFree && <span className="text-green-600 ml-1">[Free Preview]</span>}
+                        {lecture.isPreviewFree && <span className="text-green-600 ml-1 transition-colors duration-300">[Free Preview]</span>}
                       </span>
                     </div>
                     <button
                       type="button"
                       onClick={() => deleteLecture(chapter.chapterId, lecture.lectureId)}
-                      className="bg-red-400 text-white py-1 px-2 rounded hover:bg-red-500 text-sm"
+                      className="bg-red-400 text-white py-1 px-2 rounded transition-all duration-300 hover:bg-red-500 hover:scale-105 hover:shadow-md text-sm"
                     >
                       Remove
                     </button>
                   </div>
                 ))}
                 {chapter.chapterContent.length === 0 && (
-                  <p className="text-gray-500 italic py-2">No lectures added yet</p>
+                  <p className="text-gray-500 italic py-2 transition-colors duration-300">No lectures added yet</p>
                 )}
               </div>
             </div>
@@ -301,7 +302,8 @@ const AddCourse = () => {
         <button
           type="submit"
           onClick={handleSubmit}
-          className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800"
+          className="bg-black text-white py-2 px-4 rounded transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-lg animate-scale-in"
+          style={{ animationDelay: '1.2s' }}
         >
           ADD
         </button>
@@ -309,15 +311,15 @@ const AddCourse = () => {
 
       {/* Lecture Popup */}
       {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4">Add Lecture</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in-up">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 animate-scale-in">
+            <h3 className="text-xl font-bold mb-4 transition-colors duration-300 hover:text-blue-600">Add Lecture</h3>
 
             <div className="flex flex-col gap-3">
               <input
                 type="text"
                 placeholder="Lecture Title"
-                className="outline-none py-2 px-3 rounded border border-gray-500"
+                className="outline-none py-2 px-3 rounded border border-gray-500 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400"
                 value={lectureDetails.lectureTitle}
                 onChange={(e) => setLectureDetails({ ...lectureDetails, lectureTitle: e.target.value })}
                 required
@@ -326,7 +328,7 @@ const AddCourse = () => {
               <input
                 type="number"
                 placeholder="Duration (minutes)"
-                className="outline-none py-2 px-3 rounded border border-gray-500"
+                className="outline-none py-2 px-3 rounded border border-gray-500 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400"
                 value={lectureDetails.lectureDuration}
                 onChange={(e) => setLectureDetails({ ...lectureDetails, lectureDuration: e.target.value })}
                 required
@@ -335,7 +337,7 @@ const AddCourse = () => {
               <input
                 type="url"
                 placeholder="Lecture URL"
-                className="outline-none py-2 px-3 rounded border border-gray-500"
+                className="outline-none py-2 px-3 rounded border border-gray-500 transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 hover:border-gray-400"
                 value={lectureDetails.lectureUrl}
                 onChange={(e) => setLectureDetails({ ...lectureDetails, lectureUrl: e.target.value })}
                 required
@@ -347,8 +349,9 @@ const AddCourse = () => {
                   id="isPreviewFree"
                   checked={lectureDetails.isPreviewFree}
                   onChange={(e) => setLectureDetails({ ...lectureDetails, isPreviewFree: e.target.checked })}
+                  className="transition-all duration-300 hover:scale-110"
                 />
-                <label htmlFor="isPreviewFree">Free Preview</label>
+                <label htmlFor="isPreviewFree" className="transition-colors duration-300 hover:text-blue-600">Free Preview</label>
               </div>
             </div>
 
@@ -356,14 +359,14 @@ const AddCourse = () => {
               <button
                 type="button"
                 onClick={addLecture}
-                className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 flex-1"
+                className="bg-green-500 text-white py-2 px-4 rounded transition-all duration-300 hover:bg-green-600 hover:scale-105 hover:shadow-lg flex-1"
               >
                 Add Lecture
               </button>
               <button
                 type="button"
                 onClick={() => setShowPopup(false)}
-                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 flex-1"
+                className="bg-gray-500 text-white py-2 px-4 rounded transition-all duration-300 hover:bg-gray-600 hover:scale-105 hover:shadow-lg flex-1"
               >
                 Cancel
               </button>

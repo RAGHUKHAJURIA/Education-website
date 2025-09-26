@@ -85,58 +85,58 @@ const CourseDetails = () => {
 
   return courseData ? (
     <>
-      <div className='relative min-h-screen flex md:flex-row flex-col-reverse gap-10 items-start justify-between md:px-36 px-8 md:pt-30 pt-20 text-left bg-transparent'>
+      <div className='relative min-h-screen flex md:flex-row flex-col-reverse gap-10 items-start justify-between md:px-36 px-8 md:pt-30 pt-20 text-left bg-transparent animate-fade-in-up'>
 
         {/* Full-page gradient background */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c8f1ff] to-[#d9d9d9]"></div>
 
         {/* left column */}
         <div className='max-w-x- z-10 text-gray-500'>
-          <h1 className='md:text-[36px] text-[26px] font-semibold text-gray-800'>{courseData.courseTitle}</h1>
+          <h1 className='md:text-[36px] text-[26px] font-semibold text-gray-800 transition-all duration-500 hover:text-blue-600 hover:scale-105 animate-fade-in-up'>{courseData.courseTitle}</h1>
           {courseData?.courseDescription && (
-            <p className='pt-4 md:text-base text-sm max-w-[500px] break-words'
+            <p className='pt-4 md:text-base text-sm max-w-[500px] break-words transition-all duration-300 hover:scale-105 animate-fade-in-up animate-stagger-1'
               dangerouslySetInnerHTML={{
                 __html: courseData.courseDescription.replace(/(?:\r\n|\r|\n)/g, "<br />").slice(0, 200)
               }}
             ></p>
           )}
 
-          <div className="flex items-center pt-3 pb-1 text-sm">
+          <div className="flex items-center pt-3 pb-1 text-sm animate-scale-in" style={{ animationDelay: '0.2s' }}>
             <p>4.5</p>
             <div className="flex">
-              {[...Array(5)].map((_, i) => (<img key={i} src={assets.star} alt="" className='h-3.5 w-3.5' />))}
+              {[...Array(5)].map((_, i) => (<img key={i} src={assets.star} alt="" className='h-3.5 w-3.5 transition-all duration-300 hover:scale-125 hover:rotate-12 animate-pulse-subtle' style={{ animationDelay: `${i * 0.1}s` }} />))}
             </div>
-            <p className="text-blue-500 pl-1">(22 ratings)</p>
-            <p className='p-3'> {courseData.enrolledStudents.length} {courseData.enrolledStudents.length > 1 ? 'students' : 'student'}</p>
+            <p className="text-blue-500 pl-1 transition-colors duration-300 hover:text-blue-600">(22 ratings)</p>
+            <p className='p-3 transition-colors duration-300 hover:text-blue-600'> {courseData.enrolledStudents.length} {courseData.enrolledStudents.length > 1 ? 'students' : 'student'}</p>
 
-            <p className='text-sm'>Course By <span className='text-blue-600 underline'>{courseData.educator.name}</span></p>
+            <p className='text-sm'>Course By <span className='text-blue-600 underline transition-colors duration-300 hover:text-blue-700'>{courseData.educator.name}</span></p>
 
           </div>
-          <div className='pt-8 text-gray-800'>
-            <h2 className='text-xl font-semibold'>Course Structure</h2>
+          <div className='pt-8 text-gray-800 animate-fade-in-up' style={{ animationDelay: '0.3s' }}>
+            <h2 className='text-xl font-semibold transition-colors duration-300 hover:text-blue-600'>Course Structure</h2>
             <div className='pt-5'>
               {courseData.courseContent.map((chapter, index) => (
-                <div key={index} className='border border-gray-300 bg-blue-50 mb-2 rounded'>
-                  <div className='flex items-center justify-between px-4 py-3 cursor-pointer select-none' onClick={() => toggleSection(index)}>
+                <div key={index} className='border border-gray-300 bg-blue-50 mb-2 rounded-lg transition-all duration-500 hover:shadow-xl hover:bg-blue-100 hover:scale-105 hover-lift animate-scale-in-bounce' style={{ animationDelay: `${0.4 + index * 0.1}s` }}>
+                  <div className='flex items-center justify-between px-4 py-3 cursor-pointer select-none transition-all duration-300 hover:bg-blue-200' onClick={() => toggleSection(index)}>
                     <div className='flex items-center gap-2'>
-                      <img className={`transform transition-transform ${openSection[index] ? 'rotate-180' : ''}`} src={assets.down_arrow_icon} alt="down arrow" />
-                      <p className='font-medium md:text-base text-sm'>{chapter.chapterTitle}</p>
+                      <img className={`transform transition-transform duration-300 hover:scale-110 ${openSection[index] ? 'rotate-180' : ''}`} src={assets.down_arrow_icon} alt="down arrow" />
+                      <p className='font-medium md:text-base text-sm transition-colors duration-300 hover:text-blue-600'>{chapter.chapterTitle}</p>
                     </div>
-                    <p className='text-sm md:text-default'>{chapter.chapterContent.length} lectures - {caluclateChapterTime(chapter)}</p>
+                    <p className='text-sm md:text-default transition-colors duration-300 hover:text-gray-700'>{chapter.chapterContent.length} lectures - {caluclateChapterTime(chapter)}</p>
                   </div>
 
                   <div className={`overflow-hidden transition-all duration-300 ${openSection[index] ? 'max-h-96' : 'max-h-0'}`}>
                     <ul className='list-disc md:pl-10 pl-4 pr-4 py-2 text-gray-600 border-t border-gray-300'>
                       {chapter.chapterContent.map((lecture, index) => (
-                        <li key={index} className='flex items-start gap-2 py-1'>
-                          <img src={assets.play_icon} alt="playicon" className='w-4 h-4 mt-1' />
+                        <li key={index} className='flex items-start gap-2 py-1 transition-all duration-300 hover:bg-white hover:shadow-sm animate-scale-in' style={{ animationDelay: `${0.5 + index * 0.05}s` }}>
+                          <img src={assets.play_icon} alt="playicon" className='w-4 h-4 mt-1 transition-transform duration-300 hover:scale-110' />
                           <div className='flex items-center justify-between w-full text-gray-800 text-xs md:text-default'>
-                            <p>{lecture.lectureTitle}</p>
+                            <p className="transition-colors duration-300 hover:text-blue-600">{lecture.lectureTitle}</p>
                             <div className='flex gap-2'>
                               {lecture.isPreviewFree && <p onClick={() => setPlayerData({
                                 videoId: lecture.lectureUrl.split('/').pop()
-                              })} className='text-blue-500 cursor-pointer'>Preview</p>}
-                              <p>{humanizeDuration(lecture.lectureDuration * 60 * 1000, { units: ['h', 'm'] })}</p>
+                              })} className='text-blue-500 cursor-pointer transition-all duration-300 hover:text-blue-600 hover:scale-105'>Preview</p>}
+                              <p className="transition-colors duration-300 hover:text-gray-600">{humanizeDuration(lecture.lectureDuration * 60 * 1000, { units: ['h', 'm'] })}</p>
                             </div>
                           </div>
                         </li>
@@ -148,8 +148,8 @@ const CourseDetails = () => {
               ))}
             </div>
           </div>
-          <div className='py-20 text-sm md:text-default'>
-            <h3 className='text-xl font-semibold text-gray-800'>Course Description</h3>
+          <div className='py-20 text-sm md:text-default animate-fade-in-up' style={{ animationDelay: '0.6s' }}>
+            <h3 className='text-xl font-semibold text-gray-800 transition-colors duration-300 hover:text-blue-600'>Course Description</h3>
             {courseData?.courseDescription && (
               <p className='pt-4 md:text-base text-sm max-w-[500px] break-words rich-text'
                 dangerouslySetInnerHTML={{
@@ -161,7 +161,7 @@ const CourseDetails = () => {
         </div>
 
         {/* right column */}
-        <div className='max-w-[420px] z-10 shadow-2xl rounded-t md:rounded-none overflow-hidden  min-w-[300px] sm:min-w-[420px]'>
+        <div className='max-w-[420px] z-10 shadow-2xl rounded-t md:rounded-none overflow-hidden  min-w-[300px] sm:min-w-[420px] transition-all duration-300 hover:shadow-3xl animate-scale-in' style={{ animationDelay: '0.7s' }}>
 
           {
             playerData ?
@@ -170,52 +170,52 @@ const CourseDetails = () => {
                   autoplay: 1
                 }
               }} iframeClassName='w-full aspect-video' />
-              : <img src={courseData.courseThumbnail} alt="" />
+              : <img src={courseData.courseThumbnail} alt="" className="transition-transform duration-300 hover:scale-105" />
           }
 
 
 
           <div className='p-5'>
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-2 animate-scale-in' style={{ animationDelay: '0.8s' }}>
 
-              <img className='w-3.5' src={assets.time_left_clock_icon} alt="" />
+              <img className='w-3.5 transition-transform duration-300 hover:scale-110' src={assets.time_left_clock_icon} alt="" />
 
 
-              <p className='text-red-500'> <span className='font-medium'>5 days </span> left at this price</p>
+              <p className='text-red-500 transition-colors duration-300 hover:text-red-600'> <span className='font-medium'>5 days </span> left at this price</p>
             </div>
-            <div className='flex gap-3 items-center pt-2'>
-              <p className='text-gray-800 md:text-4xl text-2xl font-semibold'>{currency} {courseData.coursePrice}</p>
-              <p className='md:text-lg text-gray-500'>{courseData.discount}% off</p>
+            <div className='flex gap-3 items-center pt-2 animate-scale-in' style={{ animationDelay: '0.9s' }}>
+              <p className='text-gray-800 md:text-4xl text-2xl font-semibold transition-colors duration-300 hover:text-blue-600'>{currency} {courseData.coursePrice}</p>
+              <p className='md:text-lg text-gray-500 transition-colors duration-300 hover:text-green-600'>{courseData.discount}% off</p>
             </div>
 
-            <div className='flex items-center text-sm md:text-default gap-4 pt-2 md:pt-4 text-gray-500'>
+            <div className='flex items-center text-sm md:text-default gap-4 pt-2 md:pt-4 text-gray-500 animate-scale-in' style={{ animationDelay: '1.0s' }}>
               <div className='flex items-center gap-1'>
-                <img src={assets.star} alt="star" />
-                <p>22</p>
+                <img src={assets.star} alt="star" className="transition-transform duration-300 hover:scale-110" />
+                <p className="transition-colors duration-300 hover:text-blue-600">22</p>
               </div>
               <div className='h-4 w-px bg-gray-500/40'></div>
               <div className='flex items-center gap-1'>
-                <img src={assets.time_clock_icon} alt="star" />
-                <p>{calculateCourseDuration(courseData)}</p>
+                <img src={assets.time_clock_icon} alt="star" className="transition-transform duration-300 hover:scale-110" />
+                <p className="transition-colors duration-300 hover:text-blue-600">{calculateCourseDuration(courseData)}</p>
               </div>
               <div className='h-4 w-px bg-gray-500/40'></div>
 
               <div className='flex items-center gap-1'>
-                <img src={assets.lesson_icon} alt="star" />
-                <p>{calculateNoOfLectures(courseData)} lessons</p>
+                <img src={assets.lesson_icon} alt="star" className="transition-transform duration-300 hover:scale-110" />
+                <p className="transition-colors duration-300 hover:text-blue-600">{calculateNoOfLectures(courseData)} lessons</p>
               </div>
             </div>
 
-            <button onClick={enrollCourse} className='md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium'
-            >{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
+            <button onClick={enrollCourse} className='md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium transition-all duration-300 hover:bg-blue-700 hover:scale-105 hover:shadow-lg animate-scale-in'
+              style={{ animationDelay: '1.1s' }}>{isAlreadyEnrolled ? 'Already Enrolled' : 'Enroll Now'}</button>
 
-            <div className='pt-6'>
-              <p className='md:text-xl text-lg font-medium text-gray-800 '>What is in the Course?</p>
+            <div className='pt-6 animate-fade-in-up' style={{ animationDelay: '1.2s' }}>
+              <p className='md:text-xl text-lg font-medium text-gray-800 transition-colors duration-300 hover:text-blue-600'>What is in the Course?</p>
               <ul className='ml-4 pt-2 text-sm md:text-default list-disc text-gray-500'>
-                <li>Life Time access with the free Updates</li>
-                <li>LStep by step hands on project</li>
-                <li>Downloadable lectured</li>
-                <li>Certificate for the course completion</li>
+                <li className="transition-colors duration-300 hover:text-blue-600">Life Time access with the free Updates</li>
+                <li className="transition-colors duration-300 hover:text-blue-600">Step by step hands on project</li>
+                <li className="transition-colors duration-300 hover:text-blue-600">Downloadable lectures</li>
+                <li className="transition-colors duration-300 hover:text-blue-600">Certificate for the course completion</li>
               </ul>
             </div>
 

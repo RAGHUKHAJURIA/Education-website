@@ -15,14 +15,15 @@ const SideBar = () => {
 
   ];
   return isEducator && (
-    <div className='md:w-63 w-16 border-r min-h-screen text-base boder-gray-500 py-2 flex flex-col'>
-      {menuItems.map((item) => (
+    <div className='md:w-63 w-16 border-r min-h-screen text-base boder-gray-500 py-2 flex flex-col transition-all duration-300'>
+      {menuItems.map((item, index) => (
         <NavLink to={item.path}
           key={item.name}
           end={item.path === '/educator'}
-          className={({ isActive }) => `flex items-center md:flex-row flex-col md:justify-start justify-center py-3.5 md:px-10 gap-3 ${isActive ? 'bg-indigo-50 border-r-[6px] border-indigo-500/90' : 'hover:bg-gray-100/90 border-r-[6px] border-white hover:border-gray-100/90'}`}>
-          <img src={item.icon} alt="" className='w-6 h-6' />
-          <p className='md:block hidden text-center'>{item.name}</p>
+          className={({ isActive }) => `flex items-center md:flex-row flex-col md:justify-start justify-center py-3.5 md:px-10 gap-3 transition-all duration-300 animate-fade-in-up ${isActive ? 'bg-indigo-50 border-r-[6px] border-indigo-500/90' : 'hover:bg-gray-100/90 border-r-[6px] border-white hover:border-gray-100/90'}`}
+          style={{ animationDelay: `${index * 0.1}s` }}>
+          <img src={item.icon} alt="" className='w-6 h-6 transition-transform duration-300 hover:scale-110' />
+          <p className='md:block hidden text-center transition-colors duration-300'>{item.name}</p>
         </NavLink>
       ))}
     </div>
